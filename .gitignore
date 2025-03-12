@@ -1,5 +1,7 @@
 # Ignore project files in the root
 /*.sln
+/*.vs
+/*.vsconfig
 
 # Standard binary files
 *.lib
