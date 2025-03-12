@@ -8,7 +8,6 @@
 UWarfareInventoryComponent::UWarfareInventoryComponent()
 {
 	MaxInventorySize = 0;
-	bInitializeOnBeginPlay = false;
 
 	SetIsReplicated(true);
 }

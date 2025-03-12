@@ -32,9 +32,6 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Inventory)
 	int32 MaxInventorySize;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Inventory)
-	bool bInitializeOnBeginPlay;
-
 	UFUNCTION(BlueprintPure, Category=Inventory)
 	AWarfareCharacter* GetCharacterOwner() const;
 
