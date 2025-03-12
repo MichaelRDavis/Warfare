@@ -49,24 +49,32 @@ AWarfareInventoryActor* UWarfareInventoryComponent::CreateInventoryActor(TSubcla
 {
 	AWarfareInventoryActor* Actor = nullptr;
 
-	if (ActorClass != nullptr)
+	if (CharacterOwner != nullptr)
 	{
-		Actor = GetWorld()->SpawnActor<AWarfareInventoryActor>(ActorClass);
-		if (Actor != nullptr)
+		if (ActorClass != nullptr)
 		{
-			AddInventoryActor(Actor);
+			Actor = GetWorld()->SpawnActor<AWarfareInventoryActor>(ActorClass);
+			if (Actor != nullptr)
+			{
+				AddInventoryActor(Actor);
+			}
 		}
+
+		return Actor;
 	}
 
-	return Actor;
+	return nullptr;
 }
 
 void UWarfareInventoryComponent::AddInventoryActor(AWarfareInventoryActor* ActorToAdd)
 {
-	if (ActorToAdd != nullptr)
+	if (CharacterOwner != nullptr)
 	{
-		ActorToAdd->AddToInventory(CharacterOwner);
-		Inventory.Add(ActorToAdd);
+		if (ActorToAdd != nullptr)
+		{
+			ActorToAdd->AddToInventory(CharacterOwner);
+			Inventory.Add(ActorToAdd);
+		}
 	}
 }
 

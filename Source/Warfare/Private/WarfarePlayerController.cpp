@@ -10,11 +10,11 @@ AWarfarePlayerController::AWarfarePlayerController()
 	PlayerInventoryComponent = CreateDefaultSubobject<UWarfareInventoryComponent>(TEXT("PlayerInventory"));
 }
 
-void AWarfarePlayerController::PostInitializeComponents()
+void AWarfarePlayerController::SetPawn(APawn* InPawn)
 {
-	Super::PostInitializeComponents();
+	AController::SetPawn(InPawn);
 
-	WarfareCharacter = Cast<AWarfareCharacter>(GetCharacter());
+	WarfareCharacter = Cast<AWarfareCharacter>(InPawn);
 	PlayerInventoryComponent->SetCharacterOwner(WarfareCharacter);
 }
 

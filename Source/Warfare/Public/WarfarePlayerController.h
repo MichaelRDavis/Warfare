@@ -18,7 +18,7 @@ class WARFARE_API AWarfarePlayerController : public APlayerController
 public:
 	AWarfarePlayerController();
 
-	virtual void PostInitializeComponents() override;
+	virtual void SetPawn(APawn* InPawn) override;
 
 private:
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category=Player, meta=(AllowPrivateAccess="true"))
