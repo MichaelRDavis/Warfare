@@ -16,8 +16,8 @@ class WARFARE_API UWarfareAnimInstance_Character : public UAnimInstance
 public:
 	UWarfareAnimInstance_Character();
 
-private:
-	UPROPERTY()
+protected:
+	UPROPERTY(BlueprintReadOnly)
 	TObjectPtr<AWarfareCharacter> CharacterOwner;
 
 public:

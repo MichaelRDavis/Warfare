@@ -6,7 +6,10 @@
 
 UWarfareAnimInstance_Character::UWarfareAnimInstance_Character()
 {
-	
+	Speed = 0.0f;
+	bIsMoving = false;
+	bIsFalling = false;
+	bIsCrouched = false;
 }
 
 void UWarfareAnimInstance_Character::NativeInitializeAnimation()
