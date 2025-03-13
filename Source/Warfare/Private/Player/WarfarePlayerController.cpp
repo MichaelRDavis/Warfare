@@ -1,9 +1,9 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-#include "WarfarePlayerController.h"
-#include "WarfareCharacter.h"
-#include "WarfareInventoryComponent.h"
-#include "WarfareInventoryActor.h"
+#include "Player/WarfarePlayerController.h"
+#include "Player/WarfareCharacter.h"
+#include "loadout/WarfareInventoryComponent.h"
+#include "Loadout/WarfareInventoryActor.h"
 
 AWarfarePlayerController::AWarfarePlayerController()
 {

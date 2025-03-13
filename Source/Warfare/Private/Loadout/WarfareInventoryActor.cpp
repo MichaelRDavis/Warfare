@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-#include "WarfareInventoryActor.h"
-#include "WarfareCharacter.h"
+#include "Loadout/WarfareInventoryActor.h"
+#include "Player/WarfareCharacter.h"
 
 AWarfareInventoryActor::AWarfareInventoryActor()
 {

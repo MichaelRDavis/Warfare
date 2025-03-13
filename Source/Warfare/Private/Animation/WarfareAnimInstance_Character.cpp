@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-#include "WarfareAnimInstance_Character.h"
-#include "WarfareCharacter.h"
+#include "Animation/WarfareAnimInstance_Character.h"
+#include "Player/WarfareCharacter.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
 UWarfareAnimInstance_Character::UWarfareAnimInstance_Character()

@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-#include "WarfareGameMode.h"
-#include "WarfarePlayerController.h"
+#include "Multiplayer/WarfareGameMode.h"
+#include "Player/WarfarePlayerController.h"
 
 AWarfareGameMode::AWarfareGameMode()
 {
