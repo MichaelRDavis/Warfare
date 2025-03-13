@@ -1,15 +1,15 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-#include "Loadout/WarfareInventoryActor.h"
+#include "Loadout/WarfareLoadoutActor.h"
 #include "Player/WarfareCharacter.h"
 
-AWarfareInventoryActor::AWarfareInventoryActor()
+AWarfareLoadoutActor::AWarfareLoadoutActor()
 {
 	bReplicates = true;
 	bOnlyRelevantToOwner = true;
 }
 
-void AWarfareInventoryActor::AddToInventory(AWarfareCharacter* NewOwner)
+void AWarfareLoadoutActor::AddToLoadout(AWarfareCharacter* NewOwner)
 {
 	SetInstigator(NewOwner);
 	SetOwner(NewOwner);
@@ -17,7 +17,7 @@ void AWarfareInventoryActor::AddToInventory(AWarfareCharacter* NewOwner)
 	PrimaryActorTick.AddPrerequisite(CharacterOwner, CharacterOwner->PrimaryActorTick);
 }
 
-void AWarfareInventoryActor::RemoveFromInventory()
+void AWarfareLoadoutActor::RemoveFromLoadout()
 {
 	if (CharacterOwner != nullptr)
 	{

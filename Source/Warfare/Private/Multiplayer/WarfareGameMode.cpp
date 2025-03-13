@@ -15,9 +15,9 @@ void AWarfareGameMode::SetPlayerDefaults(APawn* PlayerPawn)
 	AWarfarePlayerController* PlayerController = Cast<AWarfarePlayerController>(PlayerPawn->GetController());
 	if (PlayerController)
 	{
-		if (DefaultInventory.Num() > 0)
+		if (DefaultLoadoutClasses.Num() > 0)
 		{
-			PlayerController->GiveInventory(DefaultInventory);
+			PlayerController->GiveLoadout(DefaultLoadoutClasses);
 		}
 	}
 }

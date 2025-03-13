@@ -2,12 +2,12 @@
 
 #include "Player/WarfarePlayerController.h"
 #include "Player/WarfareCharacter.h"
-#include "loadout/WarfareInventoryComponent.h"
-#include "Loadout/WarfareInventoryActor.h"
+#include "loadout/WarfareLoadoutComponent.h"
+#include "Loadout/WarfareLoadoutActor.h"
 
 AWarfarePlayerController::AWarfarePlayerController()
 {
-	PlayerInventoryComponent = CreateDefaultSubobject<UWarfareInventoryComponent>(TEXT("PlayerInventory"));
+	PlayerLoadoutComponent = CreateDefaultSubobject<UWarfareLoadoutComponent>(TEXT("PlayerLoadout"));
 }
 
 void AWarfarePlayerController::SetPawn(APawn* InPawn)
@@ -15,16 +15,16 @@ void AWarfarePlayerController::SetPawn(APawn* InPawn)
 	AController::SetPawn(InPawn);
 
 	WarfareCharacter = Cast<AWarfareCharacter>(InPawn);
-	PlayerInventoryComponent->SetCharacterOwner(WarfareCharacter);
+	PlayerLoadoutComponent->SetCharacterOwner(WarfareCharacter);
 }
 
-void AWarfarePlayerController::GiveInventory(const TArray<TSubclassOf<AWarfareInventoryActor>>& Inventory)
+void AWarfarePlayerController::GiveLoadout(const TArray<TSubclassOf<AWarfareLoadoutActor>>& Inventory)
 {
-	for (TSubclassOf<AWarfareInventoryActor> ActorClass : Inventory)
+	for (TSubclassOf<AWarfareLoadoutActor> ActorClass : Inventory)
 	{
 		if (ActorClass != nullptr)
 		{
-			PlayerInventoryComponent->CreateInventoryActor(ActorClass);
+			PlayerLoadoutComponent->CreateLoadoutActor(ActorClass);
 		}
 	}
 }

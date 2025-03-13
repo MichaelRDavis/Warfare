@@ -6,7 +6,7 @@
 #include "GameFramework/GameMode.h"
 #include "WarfareGameMode.generated.h"
 
-class AWarfareInventoryActor;
+class AWarfareLoadoutActor;
 
 UCLASS()
 class WARFARE_API AWarfareGameMode : public AGameMode
@@ -17,7 +17,7 @@ public:
 	AWarfareGameMode();
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, NoClear, Category=Classes)
-	TArray<TSubclassOf<AWarfareInventoryActor>> DefaultInventory;
+	TArray<TSubclassOf<AWarfareLoadoutActor>> DefaultLoadoutClasses;
 
 	virtual void SetPlayerDefaults(APawn* PlayerPawn) override;
 };

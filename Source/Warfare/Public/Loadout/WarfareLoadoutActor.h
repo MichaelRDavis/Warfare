@@ -4,26 +4,26 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "WarfareInventoryActor.generated.h"
+#include "WarfareLoadoutActor.generated.h"
 
 class AWarfareCharacter;
 
 UCLASS(Abstract, Blueprintable, Notplaceable)
-class WARFARE_API AWarfareInventoryActor : public AActor
+class WARFARE_API AWarfareLoadoutActor : public AActor
 {
 	GENERATED_BODY()
 	
 public:
-	AWarfareInventoryActor();
+	AWarfareLoadoutActor();
 
 protected:
 	UPROPERTY(BlueprintReadOnly, Category=Inventory)
 	TObjectPtr<AWarfareCharacter> CharacterOwner;
 
 public:
-	/** Called when this inventory actor has been added to inventory */
-	virtual void AddToInventory(AWarfareCharacter* NewOwner);
+	/** Called when this loadout actor has been added to loadout */
+	virtual void AddToLoadout(AWarfareCharacter* NewOwner);
 
-	/** Called when this inventory actor has been removed from inventory */
-	virtual void RemoveFromInventory();
+	/** Called when this loadout actor has been removed from loadout */
+	virtual void RemoveFromLoadout();
 };

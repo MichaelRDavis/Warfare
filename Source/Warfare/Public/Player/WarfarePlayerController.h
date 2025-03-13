@@ -6,8 +6,8 @@
 #include "GameFramework/PlayerController.h"
 #include "WarfarePlayerController.generated.h"
 
-class UWarfareInventoryComponent;
-class AWarfareInventoryActor;
+class UWarfareLoadoutComponent;
+class AWarfareLoadoutActor;
 class AWarfareCharacter;
 
 UCLASS()
@@ -22,10 +22,10 @@ public:
 
 private:
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category=Player, meta=(AllowPrivateAccess="true"))
-	TObjectPtr<UWarfareInventoryComponent> PlayerInventoryComponent;
+	TObjectPtr<UWarfareLoadoutComponent> PlayerLoadoutComponent;
 
 public:
-	void GiveInventory(const TArray<TSubclassOf<AWarfareInventoryActor>>& Inventory);
+	void GiveLoadout(const TArray<TSubclassOf<AWarfareLoadoutActor>>& Loadout);
 
 private:
 	UPROPERTY()
