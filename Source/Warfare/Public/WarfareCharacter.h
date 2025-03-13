@@ -30,7 +30,7 @@ private:
 
 public:
 	/** Returns ArmsMesh subobject */
-	FORCEINLINE USkeletalMeshComponent* GetArmsMMesh() const { return ArmsMesh; }
+	FORCEINLINE USkeletalMeshComponent* GetArmsMesh() const { return ArmsMesh; }
 	/** Returns FirstPersonCameraComponent subobject */
 	FORCEINLINE UCameraComponent* GetFirstPersonCameraComponent() const { return FirstPersonCameraCommponent; }
 
