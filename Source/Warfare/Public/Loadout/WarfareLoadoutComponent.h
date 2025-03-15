@@ -21,6 +21,7 @@ public:
 	void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 
 	virtual void InitializeComponent() override;
+	virtual void BeginPlay() override;
 
 private:
 	/** Owner that owns this loadout */
@@ -93,4 +94,8 @@ public:
 	/** Get currently held weapon */
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category=Loadout)
 	AWarfareWeapon* GetWeapon() const;
+
+	/** Equip weapon from loadout */
+	UFUNCTION(BlueprintCallable, Category=Loadout)
+	void EquipWeapon();
 };

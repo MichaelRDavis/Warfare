@@ -7,6 +7,7 @@
 #include "WarfareAnimInstance_Character.generated.h"
 
 class AWarfareCharacter;
+class AWarfarePlayerController;
 
 UCLASS()
 class WARFARE_API UWarfareAnimInstance_Character : public UAnimInstance
@@ -19,6 +20,9 @@ public:
 protected:
 	UPROPERTY(BlueprintReadOnly)
 	TObjectPtr<AWarfareCharacter> CharacterOwner;
+
+	UPROPERTY(BlueprintReadOnly)
+	TObjectPtr<AWarfarePlayerController> PlayerController;
 
 public:
 	virtual void NativeInitializeAnimation() override;

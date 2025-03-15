@@ -9,8 +9,6 @@
 UWarfareLoadoutComponent::UWarfareLoadoutComponent()
 {
 	MaxLoadoutSize = 0;
-
-	SetIsReplicated(true);
 }
 
 void UWarfareLoadoutComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
@@ -29,6 +27,11 @@ void UWarfareLoadoutComponent::InitializeComponent()
 	{
 		Loadout.Reserve(MaxLoadoutSize);
 	}
+}
+
+void UWarfareLoadoutComponent::BeginPlay()
+{
+	Super::BeginPlay();
 }
 
 AWarfareCharacter* UWarfareLoadoutComponent::GetCharacterOwner() const
@@ -198,4 +201,16 @@ void UWarfareLoadoutComponent::OnRep_SwitchWeapon(AWarfareWeapon* LastWeapon)
 AWarfareWeapon* UWarfareLoadoutComponent::GetWeapon() const
 {
 	return Weapon;
+}
+
+void UWarfareLoadoutComponent::EquipWeapon()
+{
+	if (CharacterOwner->GetLocalRole() == ROLE_Authority)
+	{
+		if (Loadout.Num() > 0)
+		{
+			AWarfareWeapon* Weap = Cast<AWarfareWeapon>(Loadout[0]);
+			SwitchWeapon(Weap);
+		}
+	}
 }

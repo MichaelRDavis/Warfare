@@ -4,7 +4,7 @@
 
 AWarfareWeapon::AWarfareWeapon()
 {
-		
+	WeaponType = EWeaponType::Handgun;	
 }
 
 EWeaponType AWarfareWeapon::GetWeaponType() const

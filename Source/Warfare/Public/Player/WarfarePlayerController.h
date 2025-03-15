@@ -25,6 +25,8 @@ private:
 	TObjectPtr<UWarfareLoadoutComponent> PlayerLoadoutComponent;
 
 public:
+	FORCEINLINE UWarfareLoadoutComponent* GetPlayerLoadoutComponent() const { return PlayerLoadoutComponent; }
+
 	void GiveLoadout(const TArray<TSubclassOf<AWarfareLoadoutActor>>& Loadout);
 
 private:

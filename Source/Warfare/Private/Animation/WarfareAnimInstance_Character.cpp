@@ -2,6 +2,7 @@
 
 #include "Animation/WarfareAnimInstance_Character.h"
 #include "Player/WarfareCharacter.h"
+#include "Player/WarfarePlayerController.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
 UWarfareAnimInstance_Character::UWarfareAnimInstance_Character()
@@ -19,6 +20,7 @@ void UWarfareAnimInstance_Character::NativeInitializeAnimation()
 	if (TryGetPawnOwner() != nullptr)
 	{
 		CharacterOwner = Cast<AWarfareCharacter>(TryGetPawnOwner());
+		PlayerController = Cast<AWarfarePlayerController>(TryGetPawnOwner()->GetController());
 	}
 }
 

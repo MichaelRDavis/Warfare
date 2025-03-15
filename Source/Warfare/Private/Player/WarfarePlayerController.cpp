@@ -8,6 +8,7 @@
 AWarfarePlayerController::AWarfarePlayerController()
 {
 	PlayerLoadoutComponent = CreateDefaultSubobject<UWarfareLoadoutComponent>(TEXT("PlayerLoadout"));
+	PlayerLoadoutComponent->SetIsReplicated(true);
 	PlayerLoadoutComponent->MaxLoadoutSize = 6;
 }
 
@@ -28,4 +29,6 @@ void AWarfarePlayerController::GiveLoadout(const TArray<TSubclassOf<AWarfareLoad
 			PlayerLoadoutComponent->CreateLoadoutActor(ActorClass);
 		}
 	}
+
+	PlayerLoadoutComponent->EquipWeapon();
 }

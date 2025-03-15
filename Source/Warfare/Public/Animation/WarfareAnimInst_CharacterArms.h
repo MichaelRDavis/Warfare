@@ -6,11 +6,12 @@
 #include "Animation/WarfareAnimInstance_Character.h"
 #include "WarfareAnimInst_CharacterArms.generated.h"
 
+class AWarfareWeapon;
+
 UENUM(BlueprintType)
 enum class EWeaponAnimType : uint8
 {
-	None,
-	Pistol,
+	Handgun,
 	AssaultRifle
 };
 
@@ -24,7 +25,11 @@ public:
 
 	UWarfareAnimInst_CharacterArms();
 
+	virtual void NativeInitializeAnimation() override;
 	virtual void NativeUpdateAnimation(float DeltaTimeX) override;
+
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "Animation: Weapon")
+	TObjectPtr<AWarfareWeapon> Weapon;
 
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category="Animation: Weapon")
 	EWeaponAnimType WeaponAnimType;
