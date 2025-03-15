@@ -75,19 +75,42 @@ void AWarfareLoadoutActor::DetachFromOwner()
 	Mesh1P->SetHiddenInGame(true);
 }
 
-void AWarfareLoadoutActor::OnEquip()
+void AWarfareLoadoutActor::OnEquip(AWarfareLoadoutActor* LastLoadoutActor)
 {
 	AttachToOwner();
+	UpdateState();
+	bIsEquipping = true;
+
+	if (LastLoadoutActor)
+	{
+
+	}
+	else
+	{
+		OnEquipped();
+	}
 }
 
 void AWarfareLoadoutActor::OnEquipped()
 {
-	DetachFromOwner();
+	AttachToOwner();
+	bIsEquipped = true;
+	bIsEquipping = false;
+
+	UpdateState();
 }
 
 void AWarfareLoadoutActor::OnUnEquip()
 {
+	DetachFromOwner();
+	bIsEquipped = false;
 
+	if (bIsEquipping)
+	{
+		bIsEquipping = false;
+	}
+
+	UpdateState();
 }
 
 float AWarfareLoadoutActor::GetEquipStartedTime() const

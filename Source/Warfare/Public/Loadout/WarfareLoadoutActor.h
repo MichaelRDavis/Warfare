@@ -105,7 +105,7 @@ protected:
 
 public:
 	/** Loadout actor is being equipped by owner character */
-	virtual void OnEquip();
+	virtual void OnEquip(AWarfareLoadoutActor* LastLoadoutActor);
 
 	/** Loadout actor is now equipped by owner character */
 	virtual void OnEquipped();
