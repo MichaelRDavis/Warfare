@@ -6,8 +6,6 @@
 AWarfareWeapon::AWarfareWeapon()
 {
 	FiringComponent = CreateDefaultSubobject<UWarfareFiringComponent>(TEXT("WeapFiringComp"));
-
-	WeaponType = EWeaponType::Handgun;	
 }
 
 EWeaponType AWarfareWeapon::GetWeaponType() const
