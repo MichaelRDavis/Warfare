@@ -3,6 +3,7 @@
 #include "Loadout/WarfareLoadoutComponent.h"
 #include "Loadout/WarfareLoadoutActor.h"
 #include "Player/WarfareCharacter.h"
+#include "Weapons/WarfareWeapon.h"
 #include "Net/UnrealNetwork.h"
 
 UWarfareLoadoutComponent::UWarfareLoadoutComponent()
@@ -16,7 +17,8 @@ void UWarfareLoadoutComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProper
 {
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 
-	DOREPLIFETIME_CONDITION(UWarfareLoadoutComponent, Loadout, COND_None);
+	DOREPLIFETIME_CONDITION(UWarfareLoadoutComponent, Loadout, COND_OwnerOnly);
+	DOREPLIFETIME_CONDITION(UWarfareLoadoutComponent, Weapon, COND_Custom);
 }
 
 void UWarfareLoadoutComponent::InitializeComponent()
@@ -46,6 +48,11 @@ TArray<AWarfareLoadoutActor*> UWarfareLoadoutComponent::GetLoadout() const
 
 AWarfareLoadoutActor* UWarfareLoadoutComponent::CreateLoadoutActor(TSubclassOf<AWarfareLoadoutActor> ActorClass)
 {
+	if (CharacterOwner->GetLocalRole() < ROLE_Authority)
+	{
+		return nullptr;
+	}
+
 	AWarfareLoadoutActor* Actor = nullptr;
 
 	if (CharacterOwner != nullptr)
@@ -67,7 +74,12 @@ AWarfareLoadoutActor* UWarfareLoadoutComponent::CreateLoadoutActor(TSubclassOf<A
 
 void UWarfareLoadoutComponent::AddLoadoutActor(AWarfareLoadoutActor* ActorToAdd)
 {
-	if (CharacterOwner != nullptr)
+	if (Loadout.Num() >= MaxLoadoutSize)
+	{
+		return;
+	}
+
+	if (CharacterOwner != nullptr && CharacterOwner->GetLocalRole() == ROLE_Authority)
 	{
 		if (ActorToAdd != nullptr)
 		{
@@ -79,14 +91,14 @@ void UWarfareLoadoutComponent::AddLoadoutActor(AWarfareLoadoutActor* ActorToAdd)
 
 void UWarfareLoadoutComponent::RemoveLoadoutActor(AWarfareLoadoutActor* ActorToRemove)
 {
-	if (ActorToRemove != nullptr)
+	if (ActorToRemove != nullptr && CharacterOwner->GetLocalRole() == ROLE_Authority)
 	{
 		ActorToRemove->RemoveFromLoadout();
 		Loadout.Remove(ActorToRemove);
 	}
 }
 
-AWarfareLoadoutActor* UWarfareLoadoutComponent::FindLoadoutActor(TSubclassOf<AWarfareLoadoutActor> ActorClass)
+AWarfareLoadoutActor* UWarfareLoadoutComponent::FindLoadoutActorByClass(TSubclassOf<AWarfareLoadoutActor> ActorClass)
 {
 	for (AWarfareLoadoutActor* Actor : Loadout)
 	{
@@ -97,4 +109,93 @@ AWarfareLoadoutActor* UWarfareLoadoutComponent::FindLoadoutActor(TSubclassOf<AWa
 	}
 
 	return nullptr;
+}
+
+bool UWarfareLoadoutComponent::FindLoadoutActor(TSubclassOf<AWarfareLoadoutActor> ActorClass)
+{
+	for (AWarfareLoadoutActor* Actor : Loadout)
+	{
+		if (Actor->IsA(ActorClass))
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
+void UWarfareLoadoutComponent::DestroyLoadout()
+{
+	if (CharacterOwner->GetLocalRole() < ROLE_Authority)
+	{
+		return;
+	}
+
+	for (AWarfareLoadoutActor* Actor : Loadout)
+	{
+		if (Actor)
+		{
+			RemoveLoadoutActor(Actor);
+			Actor->Destroy();
+		}
+	}
+}
+
+void UWarfareLoadoutComponent::SwitchWeapon(AWarfareWeapon* NewWeapon, AWarfareWeapon* LastWeapon /*= nullptr*/)
+{
+	AWarfareWeapon* LocalLastWeapon = nullptr;
+
+	if (LastWeapon != nullptr)
+	{
+		LocalLastWeapon = nullptr;
+	}
+	else if (NewWeapon != Weapon)
+	{
+		LocalLastWeapon = Weapon;
+	}
+
+	// Unequip previous weapon
+	if (LocalLastWeapon)
+	{
+		LocalLastWeapon->OnUnEquip();
+	}
+
+	Weapon = NewWeapon;
+
+	// Equip new weapon
+	if (NewWeapon)
+	{
+		NewWeapon->AddToLoadout(CharacterOwner);
+		NewWeapon->OnEquip(LastWeapon);
+	}
+}
+
+void UWarfareLoadoutComponent::ServerSwitchWeapon_Implementation(AWarfareWeapon* NewWeapon)
+{
+	if (NewWeapon)
+	{
+		if (CharacterOwner->GetLocalRole() == ROLE_Authority)
+		{
+			SwitchWeapon(NewWeapon, Weapon);
+		}
+		else
+		{
+			ServerSwitchWeapon(NewWeapon);
+		}
+	}
+}
+
+bool UWarfareLoadoutComponent::ServerSwitchWeapon_Validate(AWarfareWeapon* NewWeapon)
+{
+	return true;
+}
+
+void UWarfareLoadoutComponent::OnRep_SwitchWeapon(AWarfareWeapon* LastWeapon)
+{
+	SwitchWeapon(Weapon, LastWeapon);
+}
+
+AWarfareWeapon* UWarfareLoadoutComponent::GetWeapon() const
+{
+	return Weapon;
 }

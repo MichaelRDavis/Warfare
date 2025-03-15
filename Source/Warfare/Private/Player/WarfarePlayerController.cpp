@@ -8,6 +8,7 @@
 AWarfarePlayerController::AWarfarePlayerController()
 {
 	PlayerLoadoutComponent = CreateDefaultSubobject<UWarfareLoadoutComponent>(TEXT("PlayerLoadout"));
+	PlayerLoadoutComponent->MaxLoadoutSize = 6;
 }
 
 void AWarfarePlayerController::SetPawn(APawn* InPawn)
