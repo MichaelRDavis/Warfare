@@ -120,11 +120,6 @@ void AWarfareLoadoutActor::SecondaryUse()
 
 }
 
-void AWarfareLoadoutActor::SetState()
-{
-	
-}
-
 void AWarfareLoadoutActor::UpdateState()
 {
 	

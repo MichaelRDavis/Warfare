@@ -135,9 +135,6 @@ public:
 	/** Called on secondary use, called from owning character */
 	virtual void SecondaryUse();
 
-	/** Called to set loadout actor state */
-	virtual void SetState();
-
 	/** Called to update state of loadout actor */
 	virtual void UpdateState();
 };
