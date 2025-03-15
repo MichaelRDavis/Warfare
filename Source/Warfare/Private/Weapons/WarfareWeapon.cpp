@@ -1,9 +1,12 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "Weapons/WarfareWeapon.h"
+#include "Weapons/WarfareFiringComponent.h"
 
 AWarfareWeapon::AWarfareWeapon()
 {
+	FiringComponent = CreateDefaultSubobject<UWarfareFiringComponent>(TEXT("WeapFiringComp"));
+
 	WeaponType = EWeaponType::Handgun;	
 }
 

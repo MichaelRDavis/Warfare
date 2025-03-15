@@ -6,6 +6,8 @@
 #include "Loadout/WarfareLoadoutActor.h"
 #include "WarfareWeapon.generated.h"
 
+class UWarfareFiringComponent;
+
 UENUM(BlueprintType)
 enum class EWeaponState : uint8 
 {
@@ -29,6 +31,10 @@ class WARFARE_API AWarfareWeapon : public AWarfareLoadoutActor
 	
 public:
 	AWarfareWeapon();
+
+private:
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category=Weapon, meta=(AllowPrivateAccess="true"))
+	TObjectPtr<UWarfareFiringComponent> FiringComponent;
 
 protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Weapon)
