@@ -3,6 +3,8 @@
 #include "Animation/WarfareAnimInstance_Character.h"
 #include "Player/WarfareCharacter.h"
 #include "Player/WarfarePlayerController.h"
+#include "Loadout/WarfareLoadoutComponent.h"
+#include "Weapons/WarfareWeapon.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
 UWarfareAnimInstance_Character::UWarfareAnimInstance_Character()
@@ -42,5 +44,19 @@ void UWarfareAnimInstance_Character::NativeUpdateAnimation(float DeltaTimeX)
 		}
 
 		bIsCrouched = CharacterOwner->GetCharacterMovement()->IsCrouching();
+	}
+}
+
+void UWarfareAnimInstance_Character::NativeThreadSafeUpdateAnimation(float DeltaSeconds)
+{
+	Super::NativeThreadSafeUpdateAnimation(DeltaSeconds);
+
+	if (PlayerController != nullptr)
+	{
+		UWarfareLoadoutComponent* Loadout = PlayerController->GetPlayerLoadoutComponent();
+		if (Loadout->GetWeapon() != nullptr)
+		{
+			WeaponType = Loadout->GetWeapon()->GetWeaponType();
+		}
 	}
 }

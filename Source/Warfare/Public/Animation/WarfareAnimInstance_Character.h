@@ -8,6 +8,8 @@
 
 class AWarfareCharacter;
 class AWarfarePlayerController;
+class AWarfareWeapon;
+enum class EWeaponType : uint8;
 
 UCLASS()
 class WARFARE_API UWarfareAnimInstance_Character : public UAnimInstance
@@ -27,6 +29,7 @@ protected:
 public:
 	virtual void NativeInitializeAnimation() override;
 	virtual void NativeUpdateAnimation(float DeltaTimeX) override;
+	virtual void NativeThreadSafeUpdateAnimation(float DeltaSeconds);
 
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category="Animation: Movement")
 	bool bIsMoving;
@@ -39,4 +42,7 @@ public:
 
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category="Animation: Movement")
 	float Speed;
+
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category="Animation: Weapon")
+	EWeaponType WeaponType;
 };
