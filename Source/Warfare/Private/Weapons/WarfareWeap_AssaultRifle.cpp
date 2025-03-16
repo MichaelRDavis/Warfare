@@ -1,8 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-#include "Weapons/WarfareWeapon_AssaultRifle.h"
+#include "Weapons/WarfareWeap_AssaultRifle.h"
 
-AWarfareWeapon_AssaultRifle::AWarfareWeapon_AssaultRifle()
+AWarfareWeap_AssaultRifle::AWarfareWeap_AssaultRifle()
 {
 	WeaponType = EWeaponType::AssaultRifle;
 }

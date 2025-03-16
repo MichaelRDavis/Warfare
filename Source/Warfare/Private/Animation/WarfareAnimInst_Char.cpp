@@ -1,13 +1,13 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-#include "Animation/WarfareAnimInstance_Character.h"
+#include "Animation/WarfareAnimInst_Char.h"
 #include "Player/WarfareCharacter.h"
 #include "Player/WarfarePlayerController.h"
 #include "Loadout/WarfareLoadoutComponent.h"
 #include "Weapons/WarfareWeapon.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
-UWarfareAnimInstance_Character::UWarfareAnimInstance_Character()
+UWarfareAnimInst_Char::UWarfareAnimInst_Char()
 {
 	Speed = 0.0f;
 	bIsMoving = false;
@@ -15,7 +15,7 @@ UWarfareAnimInstance_Character::UWarfareAnimInstance_Character()
 	bIsCrouched = false;
 }
 
-void UWarfareAnimInstance_Character::NativeInitializeAnimation()
+void UWarfareAnimInst_Char::NativeInitializeAnimation()
 {
 	Super::NativeInitializeAnimation();
 
@@ -26,7 +26,7 @@ void UWarfareAnimInstance_Character::NativeInitializeAnimation()
 	}
 }
 
-void UWarfareAnimInstance_Character::NativeUpdateAnimation(float DeltaTimeX)
+void UWarfareAnimInst_Char::NativeUpdateAnimation(float DeltaTimeX)
 {
 	Super::NativeUpdateAnimation(DeltaTimeX);
 
@@ -47,7 +47,7 @@ void UWarfareAnimInstance_Character::NativeUpdateAnimation(float DeltaTimeX)
 	}
 }
 
-void UWarfareAnimInstance_Character::NativeThreadSafeUpdateAnimation(float DeltaSeconds)
+void UWarfareAnimInst_Char::NativeThreadSafeUpdateAnimation(float DeltaSeconds)
 {
 	Super::NativeThreadSafeUpdateAnimation(DeltaSeconds);
 

@@ -4,13 +4,13 @@
 
 #include "CoreMinimal.h"
 #include "Weapons/WarfareWeapon.h"
-#include "WarfareWeapon_Handgun.generated.h"
+#include "WarfareWeap_Handgun.generated.h"
 
 UCLASS()
-class WARFARE_API AWarfareWeapon_Handgun : public AWarfareWeapon
+class WARFARE_API AWarfareWeap_Handgun : public AWarfareWeapon
 {
 	GENERATED_BODY()
 	
 public:
-	AWarfareWeapon_Handgun();
+	AWarfareWeap_Handgun();
 };

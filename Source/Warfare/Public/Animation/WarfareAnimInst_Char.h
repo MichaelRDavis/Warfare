@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Animation/AnimInstance.h"
-#include "WarfareAnimInstance_Character.generated.h"
+#include "WarfareAnimInst_Char.generated.h"
 
 class AWarfareCharacter;
 class AWarfarePlayerController;
@@ -12,12 +12,12 @@ class AWarfareWeapon;
 enum class EWeaponType : uint8;
 
 UCLASS()
-class WARFARE_API UWarfareAnimInstance_Character : public UAnimInstance
+class WARFARE_API UWarfareAnimInst_Char : public UAnimInstance
 {
 	GENERATED_BODY()
 	
 public:
-	UWarfareAnimInstance_Character();
+	UWarfareAnimInst_Char();
 
 protected:
 	UPROPERTY(BlueprintReadOnly)
