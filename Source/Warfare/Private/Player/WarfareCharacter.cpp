@@ -3,10 +3,6 @@
 #include "Player/WarfareCharacter.h"
 #include "Components/CapsuleComponent.h"
 #include "Camera/CameraComponent.h"
-#include "Engine/LocalPlayer.h"
-#include "EnhancedInputComponent.h"
-#include "EnhancedInputSubsystems.h"
-#include "InputActionValue.h"
 
 AWarfareCharacter::AWarfareCharacter()
 {
@@ -37,61 +33,6 @@ AWarfareCharacter::AWarfareCharacter()
 
 	SetMinNetUpdateFrequency(100.0f);
 	PrimaryActorTick.bStartWithTickEnabled = true;
-}
-
-void AWarfareCharacter::NotifyControllerChanged()
-{
-	Super::NotifyControllerChanged();
-
-	// Add Input Mapping Context
-	if (APlayerController* PlayerController = Cast<APlayerController>(Controller))
-	{
-		if (UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(PlayerController->GetLocalPlayer()))
-		{
-			Subsystem->AddMappingContext(PlayerMappingContext, 0);
-		}
-	}
-}
-
-void AWarfareCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
-{
-	// Set up action bindings
-	if (UEnhancedInputComponent* EnhancedInputComponent = Cast<UEnhancedInputComponent>(PlayerInputComponent))
-	{
-		// Moving
-		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &AWarfareCharacter::Move);
-		// Looking
-		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &AWarfareCharacter::Look);
-		// Jumping
-		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Started, this, &AWarfareCharacter::Jump);
-		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Completed, this, &AWarfareCharacter::StopJumping);
-	}
-}
-
-void AWarfareCharacter::Move(const FInputActionValue& Value)
-{
-	// Input is a Vector2D
-	FVector2D MovementVector = Value.Get<FVector2D>();
-
-	if (Controller != nullptr)
-	{
-		// Add movement
-		MoveForward(MovementVector.Y);
-		MoveRight(MovementVector.X);
-	}
-}
-
-void AWarfareCharacter::Look(const FInputActionValue& Value)
-{
-	// Input is a Vector2D
-	FVector2D LookAxisVector = Value.Get<FVector2D>();
-
-	if (Controller != nullptr)
-	{
-		// Add yaw and pitch input to controller
-		AddControllerYawInput(LookAxisVector.X);
-		AddControllerPitchInput(LookAxisVector.Y);
-	}
 }
 
 void AWarfareCharacter::MoveForward(float Value)

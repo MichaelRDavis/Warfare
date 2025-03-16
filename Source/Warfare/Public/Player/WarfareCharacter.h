@@ -7,9 +7,6 @@
 #include "WarfareCharacter.generated.h"
 
 class UCameraComponent;
-class UInputMappingContext;
-class UInputAction;
-struct FInputActionValue;
 
 UCLASS()
 class WARFARE_API AWarfareCharacter : public ACharacter
@@ -33,34 +30,6 @@ public:
 	FORCEINLINE USkeletalMeshComponent* GetArmsMesh() const { return ArmsMesh; }
 	/** Returns FirstPersonCameraComponent subobject */
 	FORCEINLINE UCameraComponent* GetFirstPersonCameraComponent() const { return FirstPersonCameraCommponent; }
-
-	// ACharacter interface
-	virtual void NotifyControllerChanged() override;
-	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
-	// End of ACharacter interface
-
-private:
-	/** Player input MappingConntext */
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Input, meta=(AllowPrivateAccess="true"))
-	TObjectPtr<UInputMappingContext> PlayerMappingContext;
-
-	/** Move input action */
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Input, meta=(AllowPrivateAccess="true"))
-	TObjectPtr<UInputAction> MoveAction;
-
-	/** Look input action */
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Input, meta=(AllowPrivateAccess="true"))
-	TObjectPtr<UInputAction> LookAction;
-
-	/** Jump input action */
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Input, meta=(AllowPrivateAccess="true"))
-	TObjectPtr<UInputAction> JumpAction;
-
-	/** Called for movement input */
-	void Move(const FInputActionValue& Value);
-
-	/** Called for look input */
-	void Look(const FInputActionValue& Value);
 
 	/** Handles moving forward/backward */
 	void MoveForward(float Value);
