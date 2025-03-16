@@ -8,13 +8,6 @@
 
 class AWarfareWeapon;
 
-UENUM(BlueprintType)
-enum class EWeaponAnimType : uint8
-{
-	Handgun,
-	AssaultRifle
-};
-
 UCLASS()
 class WARFARE_API UWarfareAnimInst_CharacterArms : public UWarfareAnimInstance_Character
 {
@@ -28,9 +21,6 @@ public:
 	virtual void NativeInitializeAnimation() override;
 	virtual void NativeUpdateAnimation(float DeltaTimeX) override;
 
-	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "Animation: Weapon")
-	TObjectPtr<AWarfareWeapon> Weapon;
-
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category="Animation: Weapon")
-	EWeaponAnimType WeaponAnimType;
+	TObjectPtr<AWarfareWeapon> Weapon;
 };

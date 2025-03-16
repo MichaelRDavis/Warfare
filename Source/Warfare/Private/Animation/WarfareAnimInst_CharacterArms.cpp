@@ -29,18 +29,5 @@ void UWarfareAnimInst_CharacterArms::NativeUpdateAnimation(float DeltaTimeX)
 				Weapon = Loadout->GetWeapon();
 			}
 		}
-
-		if (Weapon)
-		{
-			EWeaponType WeapType = Weapon->GetWeaponType();
-			if (WeapType == EWeaponType::Handgun)
-			{
-				WeaponAnimType = EWeaponAnimType::Handgun;
-			}
-			else if (WeapType == EWeaponType::AssaultRifle)
-			{
-				WeaponAnimType = EWeaponAnimType::AssaultRifle;
-			}
-		}
 	}
 }
