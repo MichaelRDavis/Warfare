@@ -24,6 +24,8 @@ public:
 	virtual void InitializeComponent() override;
 	virtual void BeginPlay() override;
 
+	virtual void InitLoadout();
+
 private:
 	/** Owner that owns this loadout */
 	UPROPERTY(BlueprintReadOnly, Category=Loadout, meta=(AllowPrivateAccess="true"))

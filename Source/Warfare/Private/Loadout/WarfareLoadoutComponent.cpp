@@ -35,6 +35,21 @@ void UWarfareLoadoutComponent::BeginPlay()
 	Super::BeginPlay();
 }
 
+void UWarfareLoadoutComponent::InitLoadout()
+{
+	for (AWarfareLoadoutActor* Actor : Loadout)
+	{
+		if (Actor->IsA(AWarfareWeapon::StaticClass()))
+		{
+			AWarfareWeapon* Weap = Cast<AWarfareWeapon>(Actor);
+			if (Weap)
+			{
+				Weap->GetFiringComponent()->SetPlayerController(PlayerController);
+			}
+		}
+	}
+}
+
 void UWarfareLoadoutComponent::SetPlayerController(AWarfarePlayerController* NewController)
 {
 	PlayerController = NewController;
@@ -216,7 +231,6 @@ void UWarfareLoadoutComponent::EquipWeapon()
 		if (Loadout.Num() > 0)
 		{
 			AWarfareWeapon* Weap = Cast<AWarfareWeapon>(Loadout[0]);
-			Weap->GetFiringComponent()->SetPlayerController(PlayerController);
 			SwitchWeapon(Weap);
 		}
 	}

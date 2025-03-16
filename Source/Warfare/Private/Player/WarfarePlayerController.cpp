@@ -35,6 +35,7 @@ void AWarfarePlayerController::SetPawn(APawn* InPawn)
 	WarfareCharacter = Cast<AWarfareCharacter>(InPawn);
 	PlayerLoadoutComponent->SetCharacterOwner(WarfareCharacter);
 	PlayerLoadoutComponent->SetPlayerController(this);
+	PlayerLoadoutComponent->InitLoadout();
 }
 
 void AWarfarePlayerController::SetupInputComponent()
