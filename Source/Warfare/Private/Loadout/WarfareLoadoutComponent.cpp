@@ -4,6 +4,7 @@
 #include "Loadout/WarfareLoadoutActor.h"
 #include "Player/WarfareCharacter.h"
 #include "Weapons/WarfareWeapon.h"
+#include "Weapons/WarfareFiringComponent.h"
 #include "Net/UnrealNetwork.h"
 
 UWarfareLoadoutComponent::UWarfareLoadoutComponent()
@@ -32,6 +33,11 @@ void UWarfareLoadoutComponent::InitializeComponent()
 void UWarfareLoadoutComponent::BeginPlay()
 {
 	Super::BeginPlay();
+}
+
+void UWarfareLoadoutComponent::SetPlayerController(AWarfarePlayerController* NewController)
+{
+	PlayerController = NewController;
 }
 
 AWarfareCharacter* UWarfareLoadoutComponent::GetCharacterOwner() const
@@ -210,6 +216,7 @@ void UWarfareLoadoutComponent::EquipWeapon()
 		if (Loadout.Num() > 0)
 		{
 			AWarfareWeapon* Weap = Cast<AWarfareWeapon>(Loadout[0]);
+			Weap->GetFiringComponent()->SetPlayerController(PlayerController);
 			SwitchWeapon(Weap);
 		}
 	}

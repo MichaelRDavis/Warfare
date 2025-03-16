@@ -9,6 +9,7 @@
 class AWarfareLoadoutActor;
 class AWarfareWeapon;
 class AWarfareCharacter;
+class AWarfarePlayerController;
 
 UCLASS(ClassGroup=(Loadout))
 class WARFARE_API UWarfareLoadoutComponent : public UActorComponent
@@ -28,6 +29,10 @@ private:
 	UPROPERTY(BlueprintReadOnly, Category=Loadout, meta=(AllowPrivateAccess="true"))
 	TObjectPtr<AWarfareCharacter> CharacterOwner;
 
+	/** Player controller */
+	UPROPERTY(BlueprintReadOnly, Category=Loadout, meta=(AllowPrivateAccess="true"))
+	TObjectPtr<AWarfarePlayerController> PlayerController;
+
 	/** List of loadout items */
 	UPROPERTY(Replicated, BlueprintReadOnly, Category=Loadout, meta=(AllowPrivateAccess="true"))
 	TArray<AWarfareLoadoutActor*> Loadout;
@@ -40,6 +45,10 @@ public:
 	/** Maximum number of items allowed in loadout */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Loadout)
 	int32 MaxLoadoutSize;
+
+	/** Sets player controller */
+	UFUNCTION(BlueprintCallable, Category=Loadout)
+	void SetPlayerController(AWarfarePlayerController* NewController);
 
 	/** Returns owning character */
 	UFUNCTION(BlueprintPure, Category=Loadout)

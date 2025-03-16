@@ -37,7 +37,7 @@ private:
 	TObjectPtr<UWarfareFiringComponent> FiringComponent;
 
 public:
-	
+	FORCEINLINE UWarfareFiringComponent* GetFiringComponent() const { return FiringComponent; }
 
 protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Weapon)

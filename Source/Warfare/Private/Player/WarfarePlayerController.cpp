@@ -18,6 +18,7 @@ void AWarfarePlayerController::SetPawn(APawn* InPawn)
 
 	WarfareCharacter = Cast<AWarfareCharacter>(InPawn);
 	PlayerLoadoutComponent->SetCharacterOwner(WarfareCharacter);
+	PlayerLoadoutComponent->SetPlayerController(this);
 }
 
 void AWarfarePlayerController::GiveLoadout(const TArray<TSubclassOf<AWarfareLoadoutActor>>& Inventory)
