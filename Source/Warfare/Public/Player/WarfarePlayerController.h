@@ -54,6 +54,10 @@ private:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Input, meta=(AllowPrivateAccess="true"))
 	TObjectPtr<UInputAction> JumpAction;
 
+	/** Fire input action */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Input, meta=(AllowPrivateAccess="true"))
+	TObjectPtr<UInputAction> FireAction;
+
 	/** Called for movement input */
 	void Move(const FInputActionValue& Value);
 
@@ -65,4 +69,10 @@ private:
 
 	/** Player released jump action */
 	void StopJumping();
+
+	/** Player pressed start fire action */
+	void OnStartFire();
+
+	/** Player released start fire action */
+	void OnStopFire();
 };

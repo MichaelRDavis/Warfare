@@ -4,6 +4,7 @@
 #include "Player/WarfareCharacter.h"
 #include "loadout/WarfareLoadoutComponent.h"
 #include "Loadout/WarfareLoadoutActor.h"
+#include "Weapons/WarfareWeapon.h"
 #include "Engine/LocalPlayer.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
@@ -50,6 +51,9 @@ void AWarfarePlayerController::SetupInputComponent()
 		// Jumping
 		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Started, this, &AWarfarePlayerController::Jump);
 		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Completed, this, &AWarfarePlayerController::StopJumping);
+		// Firing
+		EnhancedInputComponent->BindAction(FireAction, ETriggerEvent::Triggered, this, &AWarfarePlayerController::OnStartFire);
+		EnhancedInputComponent->BindAction(FireAction, ETriggerEvent::Canceled, this, &AWarfarePlayerController::OnStopFire);
 	}
 }
 
@@ -102,5 +106,21 @@ void AWarfarePlayerController::StopJumping()
 	if (WarfareCharacter != nullptr)
 	{
 		WarfareCharacter->StopJumping();
+	}
+}
+
+void AWarfarePlayerController::OnStartFire()
+{
+	if (PlayerLoadoutComponent->GetWeapon() != nullptr)
+	{
+		PlayerLoadoutComponent->GetWeapon()->StartFire();
+	}
+}
+
+void AWarfarePlayerController::OnStopFire()
+{
+	if (PlayerLoadoutComponent->GetWeapon() != nullptr)
+	{
+		PlayerLoadoutComponent->GetWeapon()->StopFire();
 	}
 }
