@@ -53,7 +53,7 @@ void AWarfarePlayerController::SetupInputComponent()
 		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Completed, this, &AWarfarePlayerController::StopJumping);
 		// Firing
 		EnhancedInputComponent->BindAction(FireAction, ETriggerEvent::Triggered, this, &AWarfarePlayerController::OnStartFire);
-		EnhancedInputComponent->BindAction(FireAction, ETriggerEvent::Canceled, this, &AWarfarePlayerController::OnStopFire);
+		EnhancedInputComponent->BindAction(FireAction, ETriggerEvent::Completed, this, &AWarfarePlayerController::OnStopFire);
 	}
 }
 

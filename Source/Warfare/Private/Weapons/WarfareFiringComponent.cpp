@@ -52,6 +52,7 @@ FVector UWarfareFiringComponent::GetAdjustedAim() const
 		FVector CamLoc;
 		FRotator CamRot;
 		PlayerController->GetPlayerViewPoint(CamLoc, CamRot);
+		FinalAim = CamRot.Vector();
 	}
 
 	return FinalAim;
@@ -68,7 +69,7 @@ FVector UWarfareFiringComponent::GetFireStartLocation(const FVector& AimDir) con
 		PlayerController->GetPlayerViewPoint(OutStartTrace, CamRot);
 
 		// Adjust trace so there is nothing blocking the ray between the camera and the character, and calculate distance from adjusted start
-		OutStartTrace = OutStartTrace + AimDir * ((PlayerController->GetInstigator()->GetActorLocation() - OutStartTrace) | AimDir);
+		OutStartTrace = OutStartTrace + AimDir * ((PlayerController->GetPawn()->GetActorLocation() - OutStartTrace) | AimDir);
 	}
 
 	return OutStartTrace;
@@ -81,10 +82,12 @@ FHitResult UWarfareFiringComponent::FiringTrace(const FVector& StartTrace, const
 	if (PlayerController)
 	{
 		// Perform trace to retrieve hit info
-		FCollisionQueryParams TraceParams(SCENE_QUERY_STAT(WeaponTrace), true, PlayerController->GetInstigator());
+		FCollisionQueryParams TraceParams(SCENE_QUERY_STAT(FiringTrace), true, PlayerController->GetPawn());
 		TraceParams.bReturnPhysicalMaterial = true;
 
 		GetWorld()->LineTraceSingleByChannel(Hit, StartTrace, EndTrace, FIRING_TRACE, TraceParams);
+
+		DrawDebugLine(GetWorld(), StartTrace, EndTrace, FColor::Red, false, 1.0f, 0, 0.2f);
 	}
 
 	return Hit;
