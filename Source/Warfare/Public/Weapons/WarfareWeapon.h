@@ -36,6 +36,9 @@ private:
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category=Weapon, meta=(AllowPrivateAccess="true"))
 	TObjectPtr<UWarfareFiringComponent> FiringComponent;
 
+public:
+	
+
 protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Weapon)
 	EWeaponType WeaponType;
