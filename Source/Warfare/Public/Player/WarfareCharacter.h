@@ -7,6 +7,7 @@
 #include "WarfareCharacter.generated.h"
 
 class UCameraComponent;
+class UWarfareHealthComponent;
 
 UCLASS()
 class WARFARE_API AWarfareCharacter : public ACharacter
@@ -24,6 +25,10 @@ private:
 	/** First person camera */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Camera, meta=(AllowPrivateAccess="true"))
 	TObjectPtr<UCameraComponent> FirstPersonCameraCommponent;
+
+	/** Character health component */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Character, meta=(AllowPrivateAccess="true"))
+	TObjectPtr<UWarfareHealthComponent> CharacterHealth;
 
 public:
 	/** Returns ArmsMesh subobject */

@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "Player/WarfareCharacter.h"
+#include "Damage/WarfareHealthComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "Camera/CameraComponent.h"
 
@@ -22,6 +23,8 @@ AWarfareCharacter::AWarfareCharacter()
 	ArmsMesh->CastShadow = false;
 	ArmsMesh->bReceivesDecals = false;
 	ArmsMesh->PrimaryComponentTick.AddPrerequisite(this, PrimaryActorTick);
+
+	CharacterHealth = CreateDefaultSubobject<UWarfareHealthComponent>(TEXT("CharacterHealth"));
 
 	// Set size for collision capsule
 	GetCapsuleComponent()->InitCapsuleSize(55.0f, 96.0f);
